@@ -8,7 +8,6 @@ import Magnetic from '../common/Magnetic';
 const Navbar = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   
   // Internal state to avoid intermediate jumps during smooth scrolling
   const [internalActive, setInternalActive] = useState(activeSection);
@@ -23,12 +22,7 @@ const Navbar = ({ activeSection }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY > 50;
-      setScrolled(scrolled);
-
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = totalHeight > 0 ? window.scrollY / totalHeight : 0;
-      setScrollProgress(Math.min(1, progress));
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -121,15 +115,13 @@ const Navbar = ({ activeSection }) => {
                       }}
                     >
                       {isActive && (
-                        <motion.span
-                          layoutId="activeSection"
+                        <span
                           className="absolute inset-0 rounded-full"
                           style={{ 
                             background: 'rgba(0,229,255,0.1)', 
                             border: '1px solid rgba(0,229,255,0.3)',
                             boxShadow: '0 0 15px rgba(0,229,255,0.15) inset'
                           }}
-                          transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
                         />
                       )}
                       <span className="relative z-10 hover:text-white transition-colors">{link.label}</span>
