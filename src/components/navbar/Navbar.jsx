@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { navLinks } from '../../constants';
 import myImage from '../../assets/Myimage.png';
+import Magnetic from '../common/Magnetic';
 
 const Navbar = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -109,49 +110,52 @@ const Navbar = ({ activeSection }) => {
                 const isActive = internalActive === sectionId;
 
                 return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                    className="relative px-5 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-full"
-                    style={{
-                      color: isActive ? '#00E5FF' : '#8B95A5',
-                      textShadow: isActive ? '0 0 10px rgba(0,229,255,0.5)' : 'none',
-                    }}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeSection"
-                        className="absolute inset-0 rounded-full"
-                        style={{ 
-                          background: 'rgba(0,229,255,0.1)', 
-                          border: '1px solid rgba(0,229,255,0.3)',
-                          boxShadow: '0 0 15px rgba(0,229,255,0.15) inset'
-                        }}
-                        transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
-                      />
-                    )}
-                    <span className="relative z-10 hover:text-white transition-colors">{link.label}</span>
-                  </a>
+                  <Magnetic key={link.label}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                      className="relative px-5 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-full"
+                      style={{
+                        color: isActive ? '#00E5FF' : '#8B95A5',
+                        textShadow: isActive ? '0 0 10px rgba(0,229,255,0.5)' : 'none',
+                      }}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeSection"
+                          className="absolute inset-0 rounded-full"
+                          style={{ 
+                            background: 'rgba(0,229,255,0.1)', 
+                            border: '1px solid rgba(0,229,255,0.3)',
+                            boxShadow: '0 0 15px rgba(0,229,255,0.15) inset'
+                          }}
+                          transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
+                        />
+                      )}
+                      <span className="relative z-10 hover:text-white transition-colors">{link.label}</span>
+                    </a>
+                  </Magnetic>
                 );
               })}
             </div>
 
             {/* CTA + Mobile menu */}
             <div className="flex items-center gap-3">
-              <motion.a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center justify-center px-6 py-2 rounded-full text-sm font-black text-black tracking-widest uppercase relative overflow-hidden group"
-                style={{ background: '#00E5FF', boxShadow: '0 0 20px rgba(0,229,255,0.4)' }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <Magnetic>
+                <motion.a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center justify-center px-6 py-2 rounded-full text-sm font-black text-black tracking-widest uppercase relative overflow-hidden group"
+                  style={{ background: '#00E5FF', boxShadow: '0 0 20px rgba(0,229,255,0.4)' }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                 {/* Sci-Fi button scanning line */}
                 <div className="absolute top-0 left-[-100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-40 group-hover:animate-[scan_1.5s_ease-in-out_infinite]" />
                 <span className="relative z-10">Resume</span>
               </motion.a>
+              </Magnetic>
 
               {/* Mobile hamburger */}
               <button

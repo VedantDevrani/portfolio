@@ -85,12 +85,18 @@ const Hero = () => {
       className="relative min-h-screen flex items-center"
       style={{ paddingTop: '80px' }}
     >
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 60%)',
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Full-width centered layout — background shows through right side */}
-        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] py-16">
+        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] py-4 lg:py-8">
 
           {/* LEFT — Hero content */}
-          <div className="flex flex-col justify-center z-10 relative">
+          <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left z-10 relative">
             
             {/* Ambient Background Orb for Hero Content */}
             <motion.div 
@@ -106,7 +112,7 @@ const Hero = () => {
             {/* Badge */}
             <motion.div 
               ref={badgeRef} 
-              className="mb-6"
+              className="mb-4"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
@@ -120,14 +126,14 @@ const Hero = () => {
                 }}
               >
                 <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#00E5FF', boxShadow: '0 0 6px #00E5FF' }} />
-                Available for Internships
+                Available for Work
               </span>
             </motion.div>
 
             {/* Heading */}
             <div ref={headingRef}>
               <h1
-                className="font-display font-black leading-[1.02] mb-4"
+                className="font-display font-black leading-[1.02] mb-2"
                 style={{ fontSize: 'clamp(3rem, 7.5vw, 6rem)', letterSpacing: '-0.03em' }}
               >
                 <span className="text-white">Vedant</span>
@@ -142,13 +148,13 @@ const Hero = () => {
                 </span>
               </h1>
 
-              <div className="font-display font-semibold mb-6" style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', minHeight: '2em' }}>
+              <div className="font-display font-semibold mb-4" style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', minHeight: '2em' }}>
                 <RoleSwitcher />
               </div>
             </div>
 
             {/* Bio */}
-            <p ref={subtitleRef} className="text-base leading-relaxed mb-8 max-w-lg" style={{ color: '#B0B7C3' }}>
+            <p ref={subtitleRef} className="text-base leading-relaxed mb-6 max-w-lg" style={{ color: '#B0B7C3' }}>
               Passionate B.Tech 3rd year student building{' '}
               <span style={{ color: '#fff' }}>scalable web applications</span>,
               solving algorithmic challenges, and crafting{' '}
@@ -157,13 +163,21 @@ const Hero = () => {
             </p>
 
             {/* CTAs */}
-            <div ref={ctaRef} className="flex flex-wrap gap-3">
+            <div ref={ctaRef} className="flex flex-wrap justify-center lg:justify-start gap-3">
               <motion.button
                 onClick={() => scrollToSection('projects')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm text-black"
-                style={{ background: 'linear-gradient(135deg, #00E5FF, #7C3AED)' }}
-                whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(0,229,255,0.5)' }}
-                whileTap={{ scale: 0.97 }}
+                className="px-8 py-3 rounded-full text-sm font-bold text-black tracking-widest uppercase transition-transform relative overflow-hidden group"
+                style={{ background: '#00E5FF' }}
+                animate={{
+                  boxShadow: [
+                    '0 0 15px rgba(0,229,255,0.4)',
+                    '0 0 30px rgba(0,229,255,0.8)',
+                    '0 0 15px rgba(0,229,255,0.4)'
+                  ]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 View Projects <FaArrowRight size={12} />
               </motion.button>
@@ -196,7 +210,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.4, duration: 0.6 }}
-              className="flex gap-10 mt-10 pt-8"
+              className="flex flex-wrap justify-center lg:justify-start gap-6 sm:gap-10 mt-8 pt-6 w-full"
               style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
             >
               {[
@@ -223,7 +237,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 cursor-pointer"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 cursor-pointer"
           onClick={() => scrollToSection('about')}
         >
           <div className="w-6 h-10 rounded-full border-2 border-[#00E5FF]/40 flex justify-center p-1 shadow-[0_0_15px_rgba(0,229,255,0.15)] bg-[#050816]/50 backdrop-blur-sm">

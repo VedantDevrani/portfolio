@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { HiAcademicCap, HiBookOpen } from 'react-icons/hi';
 import { education } from '../../constants';
 
@@ -16,8 +16,13 @@ const TimelineItem = ({ item, index }) => {
         transition={{ duration: 0.7, delay: index * 0.2 }}
         className="flex-1 lg:flex-none lg:w-5/12"
       >
-        <div
-          className="p-6 rounded-2xl"
+        <motion.div
+          className="p-6 rounded-2xl relative transition-all duration-300"
+          whileHover={{
+            scale: 1.02,
+            boxShadow: '0 10px 40px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.05)',
+            borderColor: 'rgba(0, 229, 255, 0.4)',
+          }}
           style={{
             background: 'rgba(255,255,255,0.03)',
             border: '1px solid rgba(255,255,255,0.07)',
@@ -99,7 +104,7 @@ const TimelineItem = ({ item, index }) => {
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* Timeline connector (desktop) */}
@@ -128,6 +133,14 @@ const TimelineItem = ({ item, index }) => {
 };
 
 const Education = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+  
+  const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <section
       id="education"
@@ -174,11 +187,20 @@ const Education = () => {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line */}
+        <div ref={containerRef} className="relative">
+          {/* Vertical line (background) */}
           <div
-            className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
-            style={{ background: 'linear-gradient(to bottom, #00E5FF44, #7C3AED44, transparent)' }}
+            className="absolute left-5 lg:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2"
+            style={{ background: 'rgba(255,255,255,0.05)' }}
+          />
+          {/* Vertical line (glowing foreground) */}
+          <motion.div
+            className="absolute left-5 lg:left-1/2 top-0 w-[2px] -translate-x-1/2"
+            style={{ 
+              height,
+              background: 'linear-gradient(to bottom, #00E5FF, #7C3AED)',
+              boxShadow: '0 0 15px #00E5FF, 0 0 30px #7C3AED'
+            }}
           />
 
           <div className="space-y-10">

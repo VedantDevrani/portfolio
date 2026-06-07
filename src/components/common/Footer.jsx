@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';
 import { navLinks, socialLinks, personalInfo } from '../../constants';
 import myImage from '../../assets/Myimage.png';
+import Magnetic from '../common/Magnetic';
 
 const socialIcons = {
   FaGithub: FaGithub,
@@ -51,7 +52,7 @@ const Footer = () => {
 
             <p className="text-sm leading-relaxed max-w-xs mb-6" style={{ color: '#B0B7C3' }}>
               Building scalable web applications and solving complex problems.
-              Available for internship opportunities.
+              Available for work opportunities.
             </p>
 
             {/* Social links */}
@@ -59,27 +60,28 @@ const Footer = () => {
               {socialLinks.map((social) => {
                 const Icon = socialIcons[social.icon];
                 return (
-                  <motion.a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      color: '#B0B7C3',
-                    }}
-                    whileHover={{
-                      background: 'rgba(0,229,255,0.08)',
-                      borderColor: 'rgba(0,229,255,0.25)',
-                      color: '#00E5FF',
-                      scale: 1.1,
-                    }}
-                    title={social.label}
-                  >
-                    {Icon && <Icon size={14} />}
-                  </motion.a>
+                  <Magnetic key={social.label}>
+                    <motion.a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
+                      style={{
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        color: '#B0B7C3',
+                      }}
+                      whileHover={{
+                        background: 'rgba(0,229,255,0.08)',
+                        borderColor: 'rgba(0,229,255,0.25)',
+                        color: '#00E5FF',
+                        scale: 1.1,
+                      }}
+                      title={social.label}
+                    >
+                      {Icon && <Icon size={14} />}
+                    </motion.a>
+                  </Magnetic>
                 );
               })}
             </div>
@@ -139,24 +141,6 @@ const Footer = () => {
             © 2025 Vedant Devrani. Built with ❤️ using React & Three.js.
           </p>
           <div className="flex items-center gap-4">
-            <span
-              className="px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(0,229,255,0.06)', border: '1px solid rgba(0,229,255,0.12)', color: '#00E5FF' }}
-            >
-              React 19
-            </span>
-            <span
-              className="px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(124,58,237,0.06)', border: '1px solid rgba(124,58,237,0.12)', color: '#7C3AED' }}
-            >
-              Three.js
-            </span>
-            <span
-              className="px-2.5 py-1 rounded-full"
-              style={{ background: 'rgba(232,121,249,0.06)', border: '1px solid rgba(232,121,249,0.12)', color: '#E879F9' }}
-            >
-              GSAP
-            </span>
           </div>
         </div>
       </div>

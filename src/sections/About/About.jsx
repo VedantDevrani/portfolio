@@ -53,11 +53,10 @@ const TiltCard = ({ card, index }) => {
       }}
       whileHover={{ scale: 1.05, zIndex: 10 }}
     >
-      {/* Sci-Fi Data Slate Outer Shell (with clip-path) */}
+      {/* Sci-Fi Data Slate Outer Shell */}
       <div 
-        className="relative w-full h-full p-[1px] transition-all duration-300"
+        className="relative w-full h-full p-[1px] rounded-2xl overflow-hidden transition-all duration-300"
         style={{
-          clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)',
           background: 'rgba(255,255,255,0.05)',
         }}
       >
@@ -69,9 +68,8 @@ const TiltCard = ({ card, index }) => {
         
         {/* Inner Solid Slate Background */}
         <div 
-          className="absolute inset-[1px] flex flex-col p-6"
+          className="relative w-full h-full flex flex-col p-6 z-10 rounded-2xl"
           style={{
-            clipPath: 'polygon(19px 0, 100% 0, 100% calc(100% - 19px), calc(100% - 19px) 100%, 0 100%, 0 19px)',
             background: 'linear-gradient(135deg, rgba(15,20,35,0.95), rgba(5,8,22,0.95))',
             boxShadow: `inset 0 0 30px rgba(0,0,0,0.8)`,
           }}
@@ -239,9 +237,9 @@ const About = () => {
         </div>
 
         {/* Main content */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20 text-center lg:text-left">
           {/* Left - Profile */}
-          <div ref={textRef}>
+          <div ref={textRef} className="flex flex-col items-center lg:items-start">
             {/* Profile avatar placeholder */}
             <div className="about-text-animate relative w-48 h-48 mx-auto lg:mx-0 mb-8">
               <div
@@ -345,7 +343,7 @@ const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="flex gap-4 p-4 rounded-xl group"
+                className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-xl group text-center sm:text-left"
                 style={{
                   background: 'rgba(255,255,255,0.02)',
                   border: '1px solid rgba(255,255,255,0.05)',

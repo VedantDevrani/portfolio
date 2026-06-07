@@ -20,7 +20,7 @@ const GignestCaseStudy = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8 }}
-      className="relative rounded-3xl overflow-hidden mb-16 p-8 lg:p-12 group"
+      className="relative rounded-3xl overflow-hidden mb-16 p-6 sm:p-8 lg:p-12 group"
       style={{
         background: 'rgba(255,255,255,0.02)',
         border: '1px solid rgba(0,229,255,0.15)',
@@ -49,7 +49,7 @@ const GignestCaseStudy = () => {
             <h3 className="font-display font-black text-4xl text-white mb-1">{gignest.title}</h3>
             <p className="text-lg" style={{ color: '#7C3AED' }}>{gignest.subtitle}</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <a href={gignest.github} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold"
               style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }}>
@@ -135,7 +135,7 @@ const Projects = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,229,255,0.05) 0%, transparent 100%)',
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,229,255,0.05) 15%, transparent 100%)',
         }}
       />
 
