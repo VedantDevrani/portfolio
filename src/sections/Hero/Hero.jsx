@@ -53,6 +53,23 @@ const RoleSwitcher = () => {
   );
 };
 
+// Floating 3D Code Symbol Component
+const CodeSymbol = ({ text, delay, duration, color, top, left, right, bottom, size }) => (
+  <motion.div
+    className="absolute font-mono font-bold select-none pointer-events-none opacity-20 z-0"
+    style={{ color, top, left, right, bottom, fontSize: size }}
+    animate={{ 
+      y: [0, -30, 0], 
+      rotateX: [0, 20, -20, 0],
+      rotateY: [0, 20, -20, 0],
+      opacity: [0.1, 0.4, 0.1]
+    }}
+    transition={{ duration, repeat: Infinity, delay, ease: "easeInOut" }}
+  >
+    {text}
+  </motion.div>
+);
+
 const Hero = () => {
   const heroRef   = useRef(null);
   const headingRef  = useRef(null);
@@ -88,7 +105,7 @@ const Hero = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Full-width centered layout — background shows through right side */}
-        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] pt-4 pb-32 lg:pt-8 lg:pb-40">
+        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] pt-4 pb-32 lg:pt-8 lg:pb-40 relative">
 
           {/* LEFT — Hero content */}
           <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left z-10 relative">
@@ -117,7 +134,18 @@ const Hero = () => {
             </motion.div>
 
             {/* Heading */}
-            <div ref={headingRef}>
+            <div ref={headingRef} className="relative z-10">
+              {/* Developer Comment Intro */}
+              <motion.div 
+                className="font-mono text-sm md:text-base mb-3 font-bold opacity-80"
+                style={{ color: '#8B5CF6' }} // Purple comment color
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                {`// HELLO WORLD, I'm`}
+              </motion.div>
+              
               <h1
                 className="font-display font-black leading-[1.02] mb-2"
                 style={{ fontSize: 'clamp(3rem, 7.5vw, 6rem)', letterSpacing: '-0.03em' }}

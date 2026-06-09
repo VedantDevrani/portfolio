@@ -2,8 +2,60 @@ import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { FiTerminal, FiCode, FiLayers, FiCpu } from 'react-icons/fi';
 import { aboutCards, personalInfo } from '../../constants';
 import myImage from '../../assets/Myimage.png';
+
+// Futuristic Holographic JSON Profile Card
+const JsonProfile = () => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="w-full rounded-2xl overflow-hidden mt-8 font-mono text-sm sm:text-base relative group" 
+      style={{ 
+        background: 'rgba(5, 8, 22, 0.7)',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(20, 184, 166, 0.2)',
+        boxShadow: '0 0 30px rgba(20, 184, 166, 0.1)',
+      }}
+    >
+      {/* Subtle animated border glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+        style={{ boxShadow: 'inset 0 0 20px rgba(139, 92, 246, 0.2)' }} 
+      />
+
+      {/* Cyberpunk Terminal Header */}
+      <div className="flex items-center px-4 py-3 border-b border-[#14B8A6]/20" style={{ background: 'rgba(20, 184, 166, 0.05)' }}>
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#14B8A6] opacity-80" />
+          <div className="w-3 h-3 rounded-full bg-[#8B5CF6] opacity-80" />
+          <div className="w-3 h-3 rounded-full bg-[#4338CA] opacity-80" />
+        </div>
+        <div className="mx-auto text-xs text-[#14B8A6] font-sans tracking-[0.2em] uppercase font-bold">profile.json</div>
+      </div>
+      
+      {/* Code Area */}
+      <div className="p-4 sm:p-5 overflow-x-auto text-left leading-relaxed">
+        <div className="flex">
+          <span className="text-gray-600 select-none pr-4 border-r border-gray-700 mr-4 text-right">
+            1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7
+          </span>
+          <code>
+            <span style={{ color: '#8B5CF6' }}>const</span> <span style={{ color: '#F8FAFC' }}>developer</span> <span style={{ color: '#8B5CF6' }}>=</span> <span style={{ color: '#9CA3AF' }}>{`{`}</span><br/>
+            &nbsp;&nbsp;<span style={{ color: '#14B8A6' }}>"name"</span>: <span style={{ color: '#A78BFA' }}>"Vedant Devrani"</span>,<br/>
+            &nbsp;&nbsp;<span style={{ color: '#14B8A6' }}>"role"</span>: <span style={{ color: '#A78BFA' }}>"Full Stack Engineer"</span>,<br/>
+            &nbsp;&nbsp;<span style={{ color: '#14B8A6' }}>"location"</span>: <span style={{ color: '#A78BFA' }}>"India"</span>,<br/>
+            &nbsp;&nbsp;<span style={{ color: '#14B8A6' }}>"skills"</span>: [<span style={{ color: '#A78BFA' }}>"React"</span>, <span style={{ color: '#A78BFA' }}>"Node.js"</span>, <span style={{ color: '#A78BFA' }}>"DSA"</span>],<br/>
+            &nbsp;&nbsp;<span style={{ color: '#14B8A6' }}>"status"</span>: <span style={{ color: '#A78BFA' }}>"Open to Work"</span><br/>
+            <span style={{ color: '#9CA3AF' }}>{`}`}</span>;
+          </code>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -287,25 +339,9 @@ const About = () => {
               </p>
             </div>
 
-            {/* Quick facts */}
-            <div className="about-text-animate grid grid-cols-2 gap-4 mt-8">
-              {[
-                { label: 'Location', value: 'India 🇮🇳' },
-                { label: 'Status', value: 'Open to Work ✅' },
-                { label: 'Focus', value: 'Full Stack + DSA' },
-                { label: 'Education', value: 'B.Tech CSE' },
-              ].map((fact) => (
-                <div
-                  key={fact.label}
-                  className="p-3 rounded-xl"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  <div className="text-xs mb-1" style={{ color: '#6B7280' }}>
-                    {fact.label}
-                  </div>
-                  <div className="text-sm font-medium text-white">{fact.value}</div>
-                </div>
-              ))}
+            {/* VS Code JSON Profile replacing Quick Facts */}
+            <div className="about-text-animate w-full">
+              <JsonProfile />
             </div>
           </div>
 
@@ -313,28 +349,28 @@ const About = () => {
           <div className="space-y-6">
             {[
               {
-                icon: '🚀',
+                icon: <FiTerminal size={20} />,
                 title: 'Building Real Products',
                 desc: 'I focus on shipping complete, polished projects — not just tutorials. Every project teaches me architecture, trade-offs, and real-world engineering.',
                 color: '#14B8A6',
               },
               {
-                icon: '🧩',
+                icon: <FiCode size={20} />,
                 title: 'DSA & Competitive Programming',
                 desc: 'Solving 1000+ problems across LeetCode, CodeChef, and GFG has sharpened my problem-solving intuition and algorithmic thinking.',
                 color: '#8B5CF6',
               },
               {
-                icon: '📐',
+                icon: <FiLayers size={20} />,
                 title: 'Engineering Quality First',
                 desc: 'Clean code, good system design, and thoughtful UX are non-negotiables. I care about the quality of what I build, not just the quantity.',
                 color: '#4338CA',
               },
               {
-                icon: '🌱',
+                icon: <FiCpu size={20} />,
                 title: 'Continuous Learning',
                 desc: 'Every week I explore new technologies, read engineering blogs, and work on something new. Growth is my constant north star.',
-                color: '#F59E0B',
+                color: '#F97316',
               },
             ].map((item, i) => (
               <motion.div
@@ -343,14 +379,26 @@ const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-30px' }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-xl group text-center sm:text-left"
+                className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-5 rounded-2xl group text-center sm:text-left relative overflow-hidden"
                 style={{
-                  background: 'rgba(255,255,255,0.02)',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  transition: 'all 0.3s',
+                  background: `linear-gradient(135deg, ${item.color}25, rgba(139, 92, 246, 0.15), rgba(20, 184, 166, 0.1), rgba(5, 8, 22, 0.8) 75%)`,
+                  backdropFilter: 'blur(20px)',
+                  border: `1px solid ${item.color}30`,
+                  boxShadow: `0 0 30px ${item.color}10`,
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
-                whileHover={{ borderColor: `${item.color}25`, backgroundColor: `${item.color}05` }}
+                whileHover={{ 
+                  borderColor: `${item.color}60`, 
+                  backgroundColor: 'rgba(15, 20, 35, 0.85)',
+                  y: -5,
+                  boxShadow: `0 15px 40px 0px ${item.color}40`
+                }}
               >
+                {/* Subtle gradient glow behind the card on hover */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none -z-10"
+                  style={{ background: `radial-gradient(circle at 10% 50%, ${item.color}15, transparent 60%)` }}
+                />
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                   style={{ background: `${item.color}15`, border: `1px solid ${item.color}20` }}

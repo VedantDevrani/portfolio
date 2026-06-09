@@ -58,6 +58,16 @@ function App() {
   const lenisRef = useLenis();
   const { activeSection } = useScrollProgress();
 
+  useEffect(() => {
+    // Secret developer console greeting
+    console.log(
+      "%cWelcome to my digital workspace! 🚀\n\n%cIf you're reading this, you probably know your way around code.\nI'm always looking for cool projects or opportunities. Let's connect!\n\n%c— Vedant Devrani",
+      "color: #14B8A6; font-size: 20px; font-weight: bold; font-family: monospace;",
+      "color: #A78BFA; font-size: 14px; font-family: monospace;",
+      "color: #8B5CF6; font-size: 14px; font-style: italic; font-family: monospace;"
+    );
+  }, []);
+
   const handleLoadComplete = () => {
     setLoading(false);
     setTimeout(() => {

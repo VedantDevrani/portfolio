@@ -1,6 +1,6 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Float, Stars, MeshDistortMaterial } from '@react-three/drei';
+import { OrbitControls, Float, Stars, MeshDistortMaterial, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Scroll-reactive camera drift and deep space exploration
@@ -26,10 +26,10 @@ const ScrollCamera = () => {
     // Look ahead into the depth of space, with a slight tilt
     camera.lookAt(camera.position.x * 0.5, camera.position.y * 0.5, depth - 10);
 
-    // Dynamic fog: gets darker and thicker as we go deeper
+    // Dynamic fog: Keep far-plane pushed out so background symbols remain visible
     if (scene.fog) {
-      scene.fog.near = 2 - smooth.current * 1.5; // Closer near-plane
-      scene.fog.far = 25 - smooth.current * 15;  // Closer far-plane (darker)
+      scene.fog.near = 2 - smooth.current * 1.5; 
+      scene.fog.far = 45 - smooth.current * 15;  // Extended far plane so fog doesn't swallow symbols
     }
   });
 
@@ -206,44 +206,146 @@ const CentralOrb = () => {
 };
 
 
-// Floating mini cubes scattered in space
-const Cube = ({ position, scale, color, speed, offset }) => {
+// Programming symbols for floating elements
+const PROGRAMMING_SYMBOLS = ['< />', '{ }', '()', '=>', 'def', '::', '[]', '===', '~$', '&&', '||', '!=', '/>', ';;', '=>'];
+
+// Floating programming symbols scattered in space
+const FloatingSymbol = ({ position, scale, color, speed, offset, symbol }) => {
+  const ref = useRef(null);
+  const { camera } = useThree();
+  const [px, py, pz] = position;
+  
+  // Random wandering parameters for unique paths
+  const wanderRadiusX = useMemo(() => Math.random() * 8 + 4, []);
+  const wanderRadiusZ = useMemo(() => Math.random() * 8 + 4, []);
+  const bobAmplitude = useMemo(() => Math.random() * 2 + 1, []);
+
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      const t = clock.getElapsedTime() * speed + offset;
+      
+      // Base wandering movement
+      let finalX = px + Math.sin(t * 0.4) * wanderRadiusX;
+      let finalY = py + Math.sin(t * 0.6) * bobAmplitude;
+      
+      // Removed the constant forward velocity. Now, their forward/backward movement 
+      // is completely driven by the camera's physical scrolling through space!
+      // This means scrolling down = they fly towards you. Scrolling up = they fly backward.
+      let finalZ = pz + Math.cos(t * 0.3) * wanderRadiusZ;
+      
+      // Robust Infinite Modulo Wrapping Logic
+      const wrap = (val, min, max) => {
+        const range = max - min;
+        return ((((val - min) % range) + range) % range) + min;
+      };
+
+      const camZ = camera.position.z;
+      const camY = camera.position.y;
+      const camX = camera.position.x;
+
+      // Wrap Z so they always spawn deep in space (camZ - 40) and fly towards the camera (camZ + 5)
+      finalZ = wrap(finalZ, camZ - 40, camZ + 5);
+      
+      // Wrap Y so they are always visible vertically no matter how far down we scroll
+      finalY = wrap(finalY, camY - 25, camY + 25);
+      
+      // Wrap X to ensure they fill the width of the screen
+      finalX = wrap(finalX, camX - 30, camX + 30);
+      
+      ref.current.position.set(finalX, finalY, finalZ);
+      
+      // Gentle tumbling rotation
+      ref.current.rotation.x += 0.005;
+      ref.current.rotation.y += 0.008;
+      ref.current.rotation.z += 0.003;
+    }
+  });
+
+  return (
+    <Text
+      ref={ref}
+      position={position}
+      scale={scale * 8} // Scaled down to a balanced size
+      color={color}
+      fontSize={0.8}
+      maxWidth={4}
+      lineHeight={1}
+      letterSpacing={0.05}
+      textAlign="center"
+      anchorX="center"
+      anchorY="middle"
+      fillOpacity={0.9} // Greatly increased opacity for high visibility
+      outlineWidth={0.015}
+      outlineColor={color}
+    >
+      {symbol}
+    </Text>
+  );
+};
+
+const FloatingSymbols = () => {
+  const symbols = useMemo(() =>
+    Array.from({ length: 120 }, (_, i) => ({
+      // Scatter completely randomly across a massive 3D volume
+      position: [
+        (Math.random() - 0.5) * 35, 
+        (Math.random() - 0.5) * 40, 
+        (Math.random() - 0.5) * 40 - 10,
+      ],
+      scale: Math.random() * 0.14 + 0.04,
+      // Array of extremely bright neon colors for maximum visibility against the dark space
+      color: ['#00FFCC', '#FF3366', '#E5C07B', '#C678DD', '#56B6C2', '#98C379', '#FF9900', '#F97316'][i % 8],
+      speed: Math.random() * 0.2 + 0.05,
+      offset: Math.random() * Math.PI * 2,
+      symbol: PROGRAMMING_SYMBOLS[i % PROGRAMMING_SYMBOLS.length]
+    })),
+  []);
+
+  return <>{symbols.map((s, i) => <FloatingSymbol key={i} {...s} />)}</>;
+};
+
+// Geometric shapes (cubes, spheres, stars/octahedrons) orbiting the central planet
+const OrbitingShape = ({ position, scale, color, speed, offset, type }) => {
   const ref = useRef(null);
   const [px, py, pz] = position;
 
   useFrame(({ clock }) => {
     if (ref.current) {
       const t = clock.getElapsedTime() * speed + offset;
-      ref.current.position.set(px, py + Math.sin(t) * 0.28, pz);
-      ref.current.rotation.x += 0.009;
-      ref.current.rotation.y += 0.014;
+      ref.current.position.set(px, py + Math.sin(t) * 0.5, pz);
+      ref.current.rotation.x += 0.01;
+      ref.current.rotation.y += 0.015;
     }
   });
 
   return (
     <mesh ref={ref} position={position} scale={scale}>
-      <boxGeometry />
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.55} metalness={0.8} roughness={0.15} />
+      {type === 0 && <boxGeometry />}
+      {type === 1 && <sphereGeometry args={[0.8, 16, 16]} />}
+      {type === 2 && <octahedronGeometry />}
+      {type === 3 && <torusGeometry args={[0.6, 0.2, 16, 32]} />}
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.6} metalness={0.8} roughness={0.2} />
     </mesh>
   );
 };
 
-const FloatingCubes = () => {
-  const cubes = useMemo(() =>
-    Array.from({ length: 16 }, (_, i) => ({
+const OrbitingShapes = () => {
+  const shapes = useMemo(() =>
+    Array.from({ length: 15 }, (_, i) => ({
       position: [
-        Math.sin((i / 16) * Math.PI * 2) * (3.0 + Math.random() * 2),
-        (Math.random() - 0.5) * 5,
-        Math.cos((i / 16) * Math.PI * 2) * (2 + Math.random() * 1.5),
+        Math.sin((i / 15) * Math.PI * 2) * (3.5 + Math.random() * 2), // Tightly revolve around center
+        (Math.random() - 0.5) * 4,
+        Math.cos((i / 15) * Math.PI * 2) * (2.5 + Math.random() * 1.5),
       ],
-      scale: Math.random() * 0.14 + 0.04,
+      scale: Math.random() * 0.12 + 0.06,
       color: ['#14B8A6', '#8B5CF6', '#4338CA'][i % 3],
-      speed: Math.random() * 0.4 + 0.15,
+      speed: Math.random() * 0.4 + 0.2,
       offset: Math.random() * Math.PI * 2,
+      type: i % 4 // Mix of 4 different geometries
     })),
   []);
 
-  return <>{cubes.map((c, i) => <Cube key={i} {...c} />)}</>;
+  return <>{shapes.map((s, i) => <OrbitingShape key={i} {...s} />)}</>;
 };
 
 // Ambient glow orbs
@@ -281,8 +383,9 @@ const BackgroundScene = () => (
     <group scale={[0.6, 0.6, 0.6]}>
       <CentralOrb />
       <ParticleField />
+      <OrbitingShapes />
     </group>
-    <FloatingCubes />
+    <FloatingSymbols />
     <ScrollCamera />
   </>
 );

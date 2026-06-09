@@ -237,9 +237,12 @@ const Contact = () => {
                 backdropFilter: 'blur(20px)',
               }}
             >
-              <h3 className="font-display font-semibold text-xl text-white mb-6">
-                Send me a message
-              </h3>
+              <div className="flex items-center gap-2 mb-6 font-mono bg-black/40 p-3 rounded-lg border border-[#14B8A6]/20 shadow-[inset_0_0_10px_rgba(20,184,166,0.1)]">
+                <span className="text-[#14B8A6] font-bold">~</span>
+                <span className="text-[#8B5CF6] font-bold">$</span>
+                <span className="text-white text-sm">./initiate_connection.sh</span>
+                <span className="w-2 h-4 bg-[#14B8A6] animate-blink ml-1" />
+              </div>
 
               {/* Name */}
               <div className="mb-4">

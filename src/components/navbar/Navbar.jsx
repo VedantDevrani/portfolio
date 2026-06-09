@@ -105,7 +105,7 @@ const Navbar = ({ activeSection }) => {
                   style={{ boxShadow: '0 0 15px rgba(20,184,166,0.4)' }}
                 />
               </div>
-              <span className="font-display font-bold text-white hidden sm:block text-lg tracking-wide group-hover:text-shadow transition-all duration-300" style={{ textShadow: '0 0 10px rgba(20,184,166,0)' }}>
+              <span className="font-display font-bold text-white text-lg tracking-wide group-hover:text-shadow transition-all duration-300" style={{ textShadow: '0 0 10px rgba(20,184,166,0)' }}>
                 Vedant<span style={{ color: '#14B8A6' }}>.dev</span>
               </span>
             </motion.a>
