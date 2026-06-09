@@ -7,7 +7,7 @@ import { socialLinks, personalInfo } from '../../constants';
 const inputClasses = `
   w-full px-4 py-3.5 rounded-xl text-sm font-medium text-white outline-none
   transition-all duration-300 bg-white/[0.04] border border-white/[0.08]
-  focus:bg-white/[0.06] focus:border-[rgba(0,229,255,0.3)]
+  focus:bg-white/[0.06] focus:border-[rgba(20,184,166,0.3)]
   placeholder:text-[#6B7280]
 `;
 
@@ -69,7 +69,7 @@ const Contact = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(124,58,237,0.05) 100%)',
+          backgroundImage: 'linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.05) 100%)',
         }}
       />
 
@@ -81,7 +81,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.2)', color: '#00E5FF' }}
+            style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.2)', color: '#14B8A6' }}
           >
             Get In Touch
           </motion.div>
@@ -95,7 +95,7 @@ const Contact = () => {
           >
             Let's{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+              backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -132,21 +132,21 @@ const Contact = () => {
                   label: 'Email',
                   value: personalInfo.email,
                   href: `mailto:${personalInfo.email}`,
-                  color: '#00E5FF',
+                  color: '#14B8A6',
                 },
                 {
                   icon: '📍',
                   label: 'Location',
                   value: 'India',
                   href: null,
-                  color: '#7C3AED',
+                  color: '#8B5CF6',
                 },
                 {
                   icon: '💼',
                   label: 'Open to',
                   value: 'SWE Internships & Collaborations',
                   href: null,
-                  color: '#E879F9',
+                  color: '#4338CA',
                 },
               ].map((info, index) => (
                 <motion.div
@@ -202,10 +202,10 @@ const Contact = () => {
                       }}
                       whileHover={{
                         scale: 1.1,
-                        background: 'rgba(0,229,255,0.08)',
-                        borderColor: 'rgba(0,229,255,0.3)',
-                        color: '#00E5FF',
-                        boxShadow: '0 0 20px rgba(0,229,255,0.2)',
+                        background: 'rgba(20,184,166,0.08)',
+                        borderColor: 'rgba(20,184,166,0.3)',
+                        color: '#14B8A6',
+                        boxShadow: '0 0 20px rgba(20,184,166,0.2)',
                       }}
                       whileTap={{ scale: 0.95 }}
                       title={social.label}
@@ -247,7 +247,7 @@ const Contact = () => {
                   Your Name
                 </label>
                 <motion.input
-                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(0,229,255,0.2)' }}
+                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(20,184,166,0.2)' }}
                   type="text"
                   name="name"
                   value={form.name}
@@ -256,12 +256,12 @@ const Contact = () => {
                   className={inputClasses}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${errors.name ? '#EF4444' : 'rgba(255,255,255,0.08)'}`,
+                    border: `1px solid ${errors.name ? '#4338CA' : 'rgba(255,255,255,0.08)'}`,
                     color: '#fff',
                   }}
                 />
                 {errors.name && (
-                  <p className="text-xs mt-1" style={{ color: '#EF4444' }}>
+                  <p className="text-xs mt-1" style={{ color: '#4338CA' }}>
                     {errors.name}
                   </p>
                 )}
@@ -273,7 +273,7 @@ const Contact = () => {
                   Email Address
                 </label>
                 <motion.input
-                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(0,229,255,0.2)' }}
+                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(20,184,166,0.2)' }}
                   type="email"
                   name="email"
                   value={form.email}
@@ -282,12 +282,12 @@ const Contact = () => {
                   className={inputClasses}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${errors.email ? '#EF4444' : 'rgba(255,255,255,0.08)'}`,
+                    border: `1px solid ${errors.email ? '#4338CA' : 'rgba(255,255,255,0.08)'}`,
                     color: '#fff',
                   }}
                 />
                 {errors.email && (
-                  <p className="text-xs mt-1" style={{ color: '#EF4444' }}>
+                  <p className="text-xs mt-1" style={{ color: '#4338CA' }}>
                     {errors.email}
                   </p>
                 )}
@@ -299,7 +299,7 @@ const Contact = () => {
                   Message
                 </label>
                 <motion.textarea
-                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(0,229,255,0.2)' }}
+                  whileFocus={{ scale: 1.02, boxShadow: '0 0 20px rgba(20,184,166,0.2)' }}
                   name="message"
                   value={form.message}
                   onChange={handleChange}
@@ -308,13 +308,13 @@ const Contact = () => {
                   className={inputClasses}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${errors.message ? '#EF4444' : 'rgba(255,255,255,0.08)'}`,
+                    border: `1px solid ${errors.message ? '#4338CA' : 'rgba(255,255,255,0.08)'}`,
                     color: '#fff',
                     resize: 'none',
                   }}
                 />
                 {errors.message && (
-                  <p className="text-xs mt-1" style={{ color: '#EF4444' }}>
+                  <p className="text-xs mt-1" style={{ color: '#4338CA' }}>
                     {errors.message}
                   </p>
                 )}
@@ -328,10 +328,10 @@ const Contact = () => {
                 style={{
                   background: status === 'success'
                     ? 'linear-gradient(135deg, #22C55E, #16A34A)'
-                    : 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+                    : 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
                   opacity: status === 'sending' ? 0.7 : 1,
                 }}
-                whileHover={status !== 'sending' ? { scale: 1.02, boxShadow: '0 0 30px rgba(0,229,255,0.4)' } : {}}
+                whileHover={status !== 'sending' ? { scale: 1.02, boxShadow: '0 0 30px rgba(20,184,166,0.4)' } : {}}
                 whileTap={{ scale: 0.98 }}
               >
                 {status === 'sending'

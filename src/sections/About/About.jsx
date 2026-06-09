@@ -70,12 +70,12 @@ const TiltCard = ({ card, index }) => {
         <div 
           className="relative w-full h-full flex flex-col p-6 z-10 rounded-2xl"
           style={{
-            background: 'linear-gradient(135deg, rgba(15,20,35,0.95), rgba(5,8,22,0.95))',
+            backgroundImage: 'linear-gradient(135deg, rgba(15,20,35,0.95), rgba(5,8,22,0.95))',
             boxShadow: `inset 0 0 30px rgba(0,0,0,0.8)`,
           }}
         >
           {/* Accent light on top edge inside */}
-          <div className="absolute top-0 left-0 w-full h-[1px] opacity-20" style={{ background: `linear-gradient(90deg, transparent, ${card.color}, transparent)` }} />
+          <div className="absolute top-0 left-0 w-full h-[1px] opacity-20" style={{ backgroundImage: `linear-gradient(90deg, transparent, ${card.color}, transparent)` }} />
 
           {/* Icon - Extreme TranslateZ */}
           <div
@@ -171,13 +171,13 @@ const About = () => {
         {/* Rotating Tech Rings */}
         <motion.div 
           className="absolute top-[20%] left-[5%] w-64 h-64 border-[1px] rounded-full opacity-20"
-          style={{ borderColor: 'rgba(0,229,255,0.3)', borderStyle: 'dashed' }}
+          style={{ borderColor: 'rgba(20,184,166,0.3)', borderStyle: 'dashed' }}
           animate={{ rotate: 360, scale: [1, 1.1, 1] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         />
         <motion.div 
           className="absolute top-[10%] left-[2%] w-96 h-96 border-[1px] rounded-full opacity-10"
-          style={{ borderColor: 'rgba(124,58,237,0.3)' }}
+          style={{ borderColor: 'rgba(139,92,246,0.3)' }}
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         />
@@ -185,13 +185,13 @@ const About = () => {
         {/* Glowing Data Lines */}
         <motion.div 
           className="absolute right-[10%] top-[-50%] w-[1px] h-[200%] opacity-20"
-          style={{ background: 'linear-gradient(to bottom, transparent, #00E5FF, transparent)' }}
+          style={{ backgroundImage: 'linear-gradient(to bottom, transparent, #14B8A6, transparent)' }}
           animate={{ y: ['-50%', '50%'] }}
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
         />
         <motion.div 
           className="absolute right-[15%] top-[-50%] w-[1px] h-[200%] opacity-20"
-          style={{ background: 'linear-gradient(to bottom, transparent, #7C3AED, transparent)' }}
+          style={{ backgroundImage: 'linear-gradient(to bottom, transparent, #8B5CF6, transparent)' }}
           animate={{ y: ['50%', '-50%'] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         />
@@ -207,9 +207,9 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
             style={{
-              background: 'rgba(124,58,237,0.08)',
-              border: '1px solid rgba(124,58,237,0.2)',
-              color: '#7C3AED',
+              background: 'rgba(139,92,246,0.08)',
+              border: '1px solid rgba(139,92,246,0.2)',
+              color: '#8B5CF6',
             }}
           >
             About Me
@@ -225,7 +225,7 @@ const About = () => {
             Who I{' '}
             <span
               style={{
-                background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+                backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -245,9 +245,9 @@ const About = () => {
               <div
                 className="w-full h-full rounded-3xl flex items-center justify-center text-6xl font-display font-black overflow-hidden relative z-10"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(0,229,255,0.1), rgba(124,58,237,0.1))',
-                  border: '2px solid rgba(0,229,255,0.2)',
-                  boxShadow: '0 0 60px rgba(0,229,255,0.1), 0 0 30px rgba(124,58,237,0.1)',
+                  backgroundImage: 'linear-gradient(135deg, rgba(20,184,166,0.1), rgba(139,92,246,0.1))',
+                  border: '2px solid rgba(20,184,166,0.2)',
+                  boxShadow: '0 0 60px rgba(20,184,166,0.1), 0 0 30px rgba(139,92,246,0.1)',
                 }}
               >
                 <img src={myImage} alt="Vedant Devrani" className="w-full h-full object-cover" />
@@ -257,8 +257,8 @@ const About = () => {
                 className="absolute -bottom-3 -right-6 px-4 py-1.5 rounded-full text-xs font-semibold z-20"
                 style={{
                   background: 'rgba(5,8,22,0.95)',
-                  border: '1px solid rgba(0,229,255,0.4)',
-                  color: '#00E5FF',
+                  border: '1px solid rgba(20,184,166,0.4)',
+                  color: '#14B8A6',
                   backdropFilter: 'blur(10px)',
                   boxShadow: '0 8px 20px rgba(0,0,0,0.6)',
                   whiteSpace: 'nowrap',
@@ -273,7 +273,7 @@ const About = () => {
               <p className="about-text-animate text-base leading-relaxed" style={{ color: '#B0B7C3' }}>
                 Hey! I'm <span className="text-white font-semibold">Vedant Devrani</span>, a B.Tech Computer Science student
                 with a deep passion for building software that people love to use. My journey into programming started
-                with a simple curiosity — <em style={{ color: '#00E5FF' }}>how does the internet actually work?</em>
+                with a simple curiosity — <em style={{ color: '#14B8A6' }}>how does the internet actually work?</em>
               </p>
               <p className="about-text-animate text-base leading-relaxed" style={{ color: '#B0B7C3' }}>
                 Today, I build full-stack web applications, compete in coding challenges, and constantly push myself
@@ -283,7 +283,7 @@ const About = () => {
               <p className="about-text-animate text-base leading-relaxed" style={{ color: '#B0B7C3' }}>
                 My goal is to join a forward-thinking team where I can contribute meaningfully,
                 ship real products, and grow fast. I'm actively looking for{' '}
-                <span style={{ color: '#00E5FF' }}>software engineering internship opportunities</span>.
+                <span style={{ color: '#14B8A6' }}>software engineering internship opportunities</span>.
               </p>
             </div>
 
@@ -316,19 +316,19 @@ const About = () => {
                 icon: '🚀',
                 title: 'Building Real Products',
                 desc: 'I focus on shipping complete, polished projects — not just tutorials. Every project teaches me architecture, trade-offs, and real-world engineering.',
-                color: '#00E5FF',
+                color: '#14B8A6',
               },
               {
                 icon: '🧩',
                 title: 'DSA & Competitive Programming',
                 desc: 'Solving 1000+ problems across LeetCode, CodeChef, and GFG has sharpened my problem-solving intuition and algorithmic thinking.',
-                color: '#7C3AED',
+                color: '#8B5CF6',
               },
               {
                 icon: '📐',
                 title: 'Engineering Quality First',
                 desc: 'Clean code, good system design, and thoughtful UX are non-negotiables. I care about the quality of what I build, not just the quantity.',
-                color: '#E879F9',
+                color: '#4338CA',
               },
               {
                 icon: '🌱',

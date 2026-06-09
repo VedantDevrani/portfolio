@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Float, Stars, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -39,137 +39,169 @@ const ScrollCamera = () => {
 // GPU particle cloud
 const ParticleField = () => {
   const ref = useRef(null);
+  const count = 3000;
 
-  const { positions, colors } = useMemo(() => {
-    const count = 900;
-    const positions = new Float32Array(count * 3);
-    const colors    = new Float32Array(count * 3);
+  const { originalPositions, colors } = useMemo(() => {
+    const originalPositions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-      const radius = Math.random() * 7 + 1.5;
-      const theta  = Math.random() * Math.PI * 2;
-      const phi    = Math.random() * Math.PI;
+      const radius = Math.random() * 2.5 + 1.6;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
 
-      positions[i * 3]     = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 14;   // spread vertically for scroll
-      positions[i * 3 + 2] = radius * Math.cos(phi);
+      originalPositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      originalPositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      originalPositions[i * 3 + 2] = radius * Math.cos(phi);
 
-      const isCyan = Math.random() > 0.5;
-      colors[i * 3]     = isCyan ? 0    : 0.49;
-      colors[i * 3 + 1] = isCyan ? 0.9  : 0.23;
-      colors[i * 3 + 2] = isCyan ? 1    : 0.93;
+      const colorType = Math.random();
+      if (colorType > 0.66) {
+        colors[i * 3] = 0.9; colors[i * 3 + 1] = 0.7; colors[i * 3 + 2] = 0.4;
+      } else if (colorType > 0.33) {
+        colors[i * 3] = 0.6; colors[i * 3 + 1] = 0.3; colors[i * 3 + 2] = 0.8;
+      } else {
+        colors[i * 3] = 0.9; colors[i * 3 + 1] = 0.9; colors[i * 3 + 2] = 0.9;
+      }
     }
-    return { positions, colors };
+    return { originalPositions, colors };
+  }, [count]);
+
+  const positions = useMemo(() => new Float32Array(originalPositions), [originalPositions]);
+  const mousePos = useRef({ x: -100, y: -100 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mousePos.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mousePos.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  useFrame(({ clock }) => {
-    if (ref.current) {
-      ref.current.rotation.y =  clock.getElapsedTime() * 0.04;
-      ref.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.02) * 0.08;
+  useFrame(({ clock, camera }) => {
+    if (!ref.current) return;
+    
+    // Base rotation
+    ref.current.rotation.y = clock.getElapsedTime() * 0.03;
+    ref.current.rotation.z = clock.getElapsedTime() * 0.02;
+
+    const positionsAttr = ref.current.geometry.attributes.position;
+    const posArray = positionsAttr.array;
+    
+    // Compute mouse vector in 3D
+    const vector = new THREE.Vector3(mousePos.current.x, mousePos.current.y, 0.5);
+    vector.unproject(camera);
+    vector.sub(camera.position).normalize();
+    const distanceToPlane = -camera.position.z / vector.z;
+    const mouse3D = camera.position.clone().add(vector.multiplyScalar(distanceToPlane));
+    
+    // World inverse matrix to convert world mouse position to local particle space
+    const invMat = new THREE.Matrix4().copy(ref.current.matrixWorld).invert();
+    mouse3D.applyMatrix4(invMat); 
+
+    // Repel logic
+    const repelRadius = 1.8;
+    const repelForce = 0.4;
+
+    for (let i = 0; i < count; i++) {
+      const idx = i * 3;
+      const ox = originalPositions[idx];
+      const oy = originalPositions[idx + 1];
+      const oz = originalPositions[idx + 2];
+
+      const dx = mouse3D.x - ox;
+      const dy = mouse3D.y - oy;
+      const dz = mouse3D.z - oz;
+      const distSq = dx*dx + dy*dy + dz*dz;
+
+      if (distSq < repelRadius * repelRadius) {
+        const dist = Math.sqrt(distSq);
+        const force = (repelRadius - dist) / repelRadius * repelForce;
+        
+        posArray[idx]     = ox - (dx / dist) * force;
+        posArray[idx + 1] = oy - (dy / dist) * force;
+        posArray[idx + 2] = oz - (dz / dist) * force;
+      } else {
+        posArray[idx]     += (ox - posArray[idx]) * 0.1;
+        posArray[idx + 1] += (oy - posArray[idx + 1]) * 0.1;
+        posArray[idx + 2] += (oz - posArray[idx + 2]) * 0.1;
+      }
     }
+    positionsAttr.needsUpdate = true;
   });
 
   return (
     <points ref={ref}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" array={positions} count={positions.length / 3} itemSize={3} />
-        <bufferAttribute attach="attributes-color"    array={colors}    count={colors.length / 3}    itemSize={3} />
+        <bufferAttribute attach="attributes-color" array={colors} count={colors.length / 3} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.03} vertexColors transparent opacity={0.75} sizeAttenuation />
+      <pointsMaterial size={0.03} vertexColors transparent opacity={0.8} sizeAttenuation />
     </points>
   );
 };
 
 // Central glowing orb — small, elegant, distorted
 const CentralOrb = () => {
-  const mesh = useRef(null);
-  const glow = useRef(null);
-  const r1   = useRef(null);
-  const r2   = useRef(null);
-  const r3   = useRef(null);
+  const meshRef = useRef(null);
+  const ringsRef = useRef(null);
 
   useFrame(({ clock, mouse }) => {
     const t = clock.getElapsedTime();
-    if (mesh.current) {
-      mesh.current.rotation.y = t * 0.25 + mouse.x * 0.08;
-      mesh.current.rotation.x = t * 0.15 + mouse.y * 0.08;
+    if (meshRef.current) {
+      meshRef.current.rotation.y = t * 0.1 + mouse.x * 0.08;
+      meshRef.current.rotation.x = mouse.y * 0.08;
     }
-    if (glow.current) {
-      glow.current.rotation.y = -t * 0.12;
-      glow.current.rotation.x =  t * 0.08;
+    if (ringsRef.current) {
+      ringsRef.current.rotation.x = t * 0.05;
+      ringsRef.current.rotation.y = t * 0.08;
     }
-    // Thin orbit rings rotate independently
-    if (r1.current) { r1.current.rotation.z = t * 0.18; }
-    if (r2.current) { r2.current.rotation.x = t * 0.14; r2.current.rotation.y = t * 0.1; }
-    if (r3.current) { r3.current.rotation.z = -t * 0.1; r3.current.rotation.x = t * 0.12; }
   });
 
   return (
-    <Float speed={1.2} rotationIntensity={0.1} floatIntensity={0.5}>
-      {/* Core orb */}
-      <mesh ref={mesh}>
-        <sphereGeometry args={[0.72, 64, 64]} />
-        <MeshDistortMaterial
-          color="#00BFFF"
-          emissive="#004466"
-          emissiveIntensity={0.9}
-          metalness={1}
-          roughness={0.05}
-          distort={0.35}
-          speed={2.5}
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
+      <mesh ref={meshRef}>
+        <sphereGeometry args={[1.5, 64, 64]} />
+        <meshStandardMaterial
+          color="#14B8A6"
+          emissive="#0D9488"
+          emissiveIntensity={0.4}
+          metalness={0.4}
+          roughness={0.4}
+          transparent
+          opacity={0.9}
         />
+        <mesh scale={[1.05, 1.05, 1.05]}>
+          <sphereGeometry args={[1.5, 64, 64]} />
+          <meshBasicMaterial color="#14B8A6" transparent opacity={0.3} side={THREE.BackSide} />
+        </mesh>
       </mesh>
 
-      {/* Inner soft glow shell */}
-      <mesh ref={glow}>
-        <sphereGeometry args={[1.05, 32, 32]} />
-        <meshBasicMaterial color="#00E5FF" transparent opacity={0.04} side={THREE.BackSide} />
-      </mesh>
+      <group ref={ringsRef}>
+        <mesh rotation={[Math.PI / 2.5, Math.PI / 4, 0]}>
+          <torusGeometry args={[2.5, 0.015, 16, 100]} />
+          <meshBasicMaterial color="#8B5CF6" transparent opacity={0.6} />
+        </mesh>
+        
+        <mesh rotation={[Math.PI / 2.1, -Math.PI / 6, 0]}>
+          <torusGeometry args={[3.0, 0.015, 16, 100]} />
+          <meshBasicMaterial color="#A78BFA" transparent opacity={0.4} />
+          <mesh position={[3.0, 0, 0]}>
+            <sphereGeometry args={[0.15, 32, 32]} />
+            <meshStandardMaterial color="#F4A261" emissive="#E76F51" emissiveIntensity={0.5} />
+          </mesh>
+        </mesh>
 
-      {/* ── Thin orbit ring 1 — cyan, tilted 30° ── */}
-      <mesh ref={r1} rotation={[Math.PI / 6, 0, 0]}>
-        <torusGeometry args={[1.7, 0.004, 4, 180]} />
-        <meshBasicMaterial color="#00E5FF" transparent opacity={0.55} />
-      </mesh>
-
-      {/* ── Thin orbit ring 2 — purple, tilted 60° ── */}
-      <mesh ref={r2} rotation={[Math.PI / 3, Math.PI / 5, 0]}>
-        <torusGeometry args={[2.1, 0.004, 4, 180]} />
-        <meshBasicMaterial color="#7C3AED" transparent opacity={0.45} />
-      </mesh>
-
-      {/* ── Thin orbit ring 3 — pink, almost flat ── */}
-      <mesh ref={r3} rotation={[Math.PI * 0.08, 0.4, 0]}>
-        <torusGeometry args={[2.55, 0.003, 4, 180]} />
-        <meshBasicMaterial color="#E879F9" transparent opacity={0.3} />
-      </mesh>
-
-      {/* Tiny satellite dots on ring 1 */}
-      {[0, Math.PI * 0.66, Math.PI * 1.33].map((angle, i) => (
-        <SatelliteDot key={i} orbitRadius={1.7} angleOffset={angle} tilt={Math.PI / 6} color={['#00E5FF', '#7C3AED', '#E879F9'][i]} speed={0.4} />
-      ))}
+        <mesh rotation={[Math.PI / 1.8, Math.PI / 8, 0]}>
+          <torusGeometry args={[4.2, 0.02, 16, 100]} />
+          <meshBasicMaterial color="#4338CA" transparent opacity={0.3} />
+          <mesh position={[-4.2, 0, 0]}>
+            <sphereGeometry args={[0.12, 32, 32]} />
+            <meshStandardMaterial color="#8B5CF6" emissive="#14B8A6" emissiveIntensity={0.5} />
+          </mesh>
+        </mesh>
+      </group>
     </Float>
-  );
-};
-
-// Small dot that orbits along a ring path
-const SatelliteDot = ({ orbitRadius, angleOffset, tilt, color, speed }) => {
-  const ref = useRef(null);
-
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const t = clock.getElapsedTime() * speed + angleOffset;
-    const x = Math.cos(t) * orbitRadius;
-    const z = Math.sin(t) * orbitRadius;
-    // Apply tilt rotation around X
-    ref.current.position.set(x, z * Math.sin(tilt), z * Math.cos(tilt));
-  });
-
-  return (
-    <mesh ref={ref}>
-      <sphereGeometry args={[0.045, 8, 8]} />
-      <meshBasicMaterial color={color} />
-    </mesh>
   );
 };
 
@@ -205,7 +237,7 @@ const FloatingCubes = () => {
         Math.cos((i / 16) * Math.PI * 2) * (2 + Math.random() * 1.5),
       ],
       scale: Math.random() * 0.14 + 0.04,
-      color: ['#00E5FF', '#7C3AED', '#E879F9'][i % 3],
+      color: ['#14B8A6', '#8B5CF6', '#4338CA'][i % 3],
       speed: Math.random() * 0.4 + 0.15,
       offset: Math.random() * Math.PI * 2,
     })),
@@ -234,24 +266,23 @@ const GlowOrb = ({ position, color, scale }) => {
 const BackgroundScene = () => (
   <>
     <ambientLight intensity={0.3} />
-    <pointLight position={[5, 4, 5]}    color="#00E5FF" intensity={3.5} distance={25} />
-    <pointLight position={[-5, -3, -5]} color="#7C3AED" intensity={3}   distance={22} />
-    <pointLight position={[0, 4, 6]}    color="#E879F9" intensity={1.5} distance={16} />
+    <pointLight position={[5, 4, 5]}    color="#14B8A6" intensity={3.5} distance={25} />
+    <pointLight position={[-5, -3, -5]} color="#8B5CF6" intensity={3}   distance={22} />
+    <pointLight position={[0, 4, 6]}    color="#4338CA" intensity={1.5} distance={16} />
 
     {/* Fog for deep space fade-out effect */}
     <fog attach="fog" args={['#050816', 5, 25]} />
 
     {/* Deep starfield */}
-    <Stars radius={90} depth={70} count={2500} factor={3} saturation={0} fade speed={0.7} />
+    <Stars radius={100} depth={50} count={8000} factor={4} saturation={0.5} fade speed={2} />
 
-    {/* Soft glow volumes */}
-    <GlowOrb position={[ 2.5,  1.5, -4]} color="#00E5FF" scale={[7, 7, 7]} />
-    <GlowOrb position={[-3.5, -2,  -5]} color="#7C3AED" scale={[9, 9, 9]} />
-    <GlowOrb position={[ 0,    3,  -6]} color="#E879F9" scale={[5, 5, 5]} />
 
-    <CentralOrb />
+
+    <group scale={[0.6, 0.6, 0.6]}>
+      <CentralOrb />
+      <ParticleField />
+    </group>
     <FloatingCubes />
-    <ParticleField />
     <ScrollCamera />
   </>
 );
@@ -272,13 +303,7 @@ const GlobalThreeBackground = () => (
       <BackgroundScene />
     </Canvas>
 
-    {/* Very subtle edge darkening only — does NOT cover center */}
-    <div
-      className="absolute inset-0 pointer-events-none"
-      style={{
-        background: `radial-gradient(ellipse 80% 70% at 50% 40%, transparent 40%, rgba(5,8,22,0.25) 100%)`,
-      }}
-    />
+
   </div>
 );
 

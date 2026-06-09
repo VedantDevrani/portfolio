@@ -46,9 +46,9 @@ const RoleSwitcher = () => {
   }, [charIndex, isDeleting, currentIndex]);
 
   return (
-    <span className="font-mono" style={{ color: '#00E5FF' }}>
+    <span className="font-mono" style={{ color: '#14B8A6' }}>
       {displayText}
-      <span className="animate-blink" style={{ color: '#00E5FF' }}>|</span>
+      <span className="animate-blink" style={{ color: '#14B8A6' }}>|</span>
     </span>
   );
 };
@@ -85,29 +85,15 @@ const Hero = () => {
       className="relative min-h-screen flex items-center"
       style={{ paddingTop: '80px' }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 60%)',
-        }}
-      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Full-width centered layout — background shows through right side */}
-        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] py-4 lg:py-8">
+        <div className="grid lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-80px)] pt-4 pb-32 lg:pt-8 lg:pb-40">
 
           {/* LEFT — Hero content */}
           <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left z-10 relative">
             
-            {/* Ambient Background Orb for Hero Content */}
-            <motion.div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full opacity-20 blur-[100px] pointer-events-none -z-10"
-              style={{ background: 'radial-gradient(circle, #00E5FF 0%, #7C3AED 50%, transparent 100%)' }}
-              animate={{ 
-                scale: [1, 1.1, 1],
-                opacity: [0.15, 0.25, 0.15],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            />
+
 
             {/* Badge */}
             <motion.div 
@@ -119,13 +105,13 @@ const Hero = () => {
               <span
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest"
                 style={{
-                  background: 'rgba(0,229,255,0.08)',
-                  border: '1px solid rgba(0,229,255,0.25)',
-                  color: '#00E5FF',
+                  background: 'rgba(20,184,166,0.08)',
+                  border: '1px solid rgba(20,184,166,0.25)',
+                  color: '#14B8A6',
                   backdropFilter: 'blur(10px)',
                 }}
               >
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#00E5FF', boxShadow: '0 0 6px #00E5FF' }} />
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#14B8A6', boxShadow: '0 0 6px #14B8A6' }} />
                 Available for Work
               </span>
             </motion.div>
@@ -139,7 +125,7 @@ const Hero = () => {
                 <span className="text-white">Vedant</span>
                 <br />
                 <span style={{
-                  background: 'linear-gradient(135deg, #00E5FF 0%, #7C3AED 55%, #E879F9 100%)',
+                  backgroundImage: 'linear-gradient(135deg, #14B8A6 0%, #8B5CF6 55%, #4338CA 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -167,12 +153,12 @@ const Hero = () => {
               <motion.button
                 onClick={() => scrollToSection('projects')}
                 className="px-8 py-3 rounded-full text-sm font-bold text-black tracking-widest uppercase transition-transform relative overflow-hidden group"
-                style={{ background: '#00E5FF' }}
+                style={{ background: '#14B8A6' }}
                 animate={{
                   boxShadow: [
-                    '0 0 15px rgba(0,229,255,0.4)',
-                    '0 0 30px rgba(0,229,255,0.8)',
-                    '0 0 15px rgba(0,229,255,0.4)'
+                    '0 0 15px rgba(20,184,166,0.4)',
+                    '0 0 30px rgba(20,184,166,0.8)',
+                    '0 0 15px rgba(20,184,166,0.4)'
                   ]
                 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -187,8 +173,8 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm"
-                style={{ border: '1px solid rgba(0,229,255,0.3)', color: '#00E5FF', background: 'rgba(0,229,255,0.05)', backdropFilter: 'blur(8px)' }}
-                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0,229,255,0.25)', borderColor: '#00E5FF' }}
+                style={{ border: '1px solid rgba(20,184,166,0.3)', color: '#14B8A6', background: 'rgba(20,184,166,0.05)', backdropFilter: 'blur(8px)' }}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(20,184,166,0.25)', borderColor: '#14B8A6' }}
                 whileTap={{ scale: 0.97 }}
               >
                 <FaDownload size={12} /> Resume
@@ -219,7 +205,7 @@ const Hero = () => {
                 { label: 'Hackathons', value: '5+' },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="font-display font-bold text-2xl" style={{ color: '#00E5FF', textShadow: '0 0 15px rgba(0,229,255,0.4)' }}>
+                  <div className="font-display font-bold text-2xl" style={{ color: '#14B8A6', textShadow: '0 0 15px rgba(20,184,166,0.4)' }}>
                     {stat.value}
                   </div>
                   <div className="text-xs mt-0.5" style={{ color: '#6B7280' }}>{stat.label}</div>
@@ -228,30 +214,11 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          {/* RIGHT — Empty space for 3D background */}
-          <div className="relative h-[480px] lg:h-[620px] hidden lg:block z-10 pointer-events-none" />
+          {/* RIGHT — Empty block to push content to the left side in grid-cols-2 */}
+          <div className="hidden lg:block w-full h-full pointer-events-none"></div>
         </div>
 
-        {/* Improved Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2, duration: 1 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 cursor-pointer"
-          onClick={() => scrollToSection('about')}
-        >
-          <div className="w-6 h-10 rounded-full border-2 border-[#00E5FF]/40 flex justify-center p-1 shadow-[0_0_15px_rgba(0,229,255,0.15)] bg-[#050816]/50 backdrop-blur-sm">
-            <motion.div
-              className="w-1.5 h-3 rounded-full bg-[#00E5FF]"
-              style={{ boxShadow: '0 0 10px #00E5FF' }}
-              animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          </div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#00E5FF] animate-pulse">
-            Scroll To Explore
-          </span>
-        </motion.div>
+
       </div>
     </section>
   );

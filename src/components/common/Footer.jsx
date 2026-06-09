@@ -27,7 +27,7 @@ const Footer = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,229,255,0.03) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(20,184,166,0.03) 0%, transparent 70%)',
         }}
       />
 
@@ -41,7 +41,7 @@ const Footer = () => {
                 alt="Logo"
                 className="w-10 h-10 rounded-xl object-cover"
                 style={{
-                  boxShadow: '0 0 20px rgba(0,229,255,0.3)',
+                  boxShadow: '0 0 20px rgba(20,184,166,0.3)',
                 }}
               />
               <div>
@@ -72,9 +72,9 @@ const Footer = () => {
                         color: '#B0B7C3',
                       }}
                       whileHover={{
-                        background: 'rgba(0,229,255,0.08)',
-                        borderColor: 'rgba(0,229,255,0.25)',
-                        color: '#00E5FF',
+                        background: 'rgba(20,184,166,0.08)',
+                        borderColor: 'rgba(20,184,166,0.25)',
+                        color: '#14B8A6',
                         scale: 1.1,
                       }}
                       title={social.label}
@@ -100,7 +100,7 @@ const Footer = () => {
                   onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                   className="block text-sm transition-colors duration-200"
                   style={{ color: '#B0B7C3' }}
-                  onMouseEnter={(e) => (e.target.style.color = '#00E5FF')}
+                  onMouseEnter={(e) => (e.target.style.color = '#14B8A6')}
                   onMouseLeave={(e) => (e.target.style.color = '#B0B7C3')}
                 >
                   {link.label}
@@ -118,7 +118,7 @@ const Footer = () => {
               <a
                 href={`mailto:${personalInfo.email}`}
                 className="block transition-colors duration-200"
-                onMouseEnter={(e) => (e.target.style.color = '#00E5FF')}
+                onMouseEnter={(e) => (e.target.style.color = '#14B8A6')}
                 onMouseLeave={(e) => (e.target.style.color = '#B0B7C3')}
               >
                 {personalInfo.email}

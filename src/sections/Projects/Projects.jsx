@@ -23,19 +23,19 @@ const GignestCaseStudy = () => {
       className="relative rounded-3xl overflow-hidden mb-16 p-6 sm:p-8 lg:p-12 group"
       style={{
         background: 'rgba(255,255,255,0.02)',
-        border: '1px solid rgba(0,229,255,0.15)',
+        border: '1px solid rgba(20,184,166,0.15)',
         backdropFilter: 'blur(20px)',
       }}
-      whileHover={{ scale: 1.02, boxShadow: '0 20px 40px rgba(0,229,255,0.15)' }}
+      whileHover={{ scale: 1.02, boxShadow: '0 20px 40px rgba(20,184,166,0.15)' }}
     >
       {/* Glow */}
       <div
         className="absolute top-0 left-0 right-0 h-[1px]"
-        style={{ background: 'linear-gradient(90deg, transparent, #00E5FF, #7C3AED, transparent)' }}
+        style={{ backgroundImage: 'linear-gradient(90deg, transparent, #14B8A6, #8B5CF6, transparent)' }}
       />
       <div
         className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full opacity-10 blur-3xl"
-        style={{ background: 'linear-gradient(135deg, #00E5FF, #7C3AED)' }}
+        style={{ backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)' }}
       />
 
       <div className="relative z-10">
@@ -43,11 +43,11 @@ const GignestCaseStudy = () => {
         <div className="flex items-start justify-between flex-wrap gap-4 mb-8">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-3"
-              style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.2)', color: '#00E5FF' }}>
+              style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.2)', color: '#14B8A6' }}>
               ⭐ Featured Project
             </div>
             <h3 className="font-display font-black text-4xl text-white mb-1">{gignest.title}</h3>
-            <p className="text-lg" style={{ color: '#7C3AED' }}>{gignest.subtitle}</p>
+            <p className="text-lg" style={{ color: '#8B5CF6' }}>{gignest.subtitle}</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <a href={gignest.github} target="_blank" rel="noopener noreferrer"
@@ -57,7 +57,7 @@ const GignestCaseStudy = () => {
             </a>
             <a href={gignest.live} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-black"
-              style={{ background: 'linear-gradient(135deg, #00E5FF, #7C3AED)' }}>
+              style={{ backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)' }}>
               <FaExternalLinkAlt size={12} /> Live Demo
             </a>
           </div>
@@ -66,7 +66,7 @@ const GignestCaseStudy = () => {
         {/* Case study grid */}
         <div className="grid lg:grid-cols-3 gap-6 mb-8">
           {[
-            { title: 'The Problem', icon: '🔴', color: '#EF4444', text: gignest.problem },
+            { title: 'The Problem', icon: '🔴', color: '#4338CA', text: gignest.problem },
             { title: 'The Solution', icon: '🟢', color: '#22C55E', text: gignest.solution },
             { title: 'Key Learnings', icon: '⚡', color: '#F59E0B', text: gignest.learnings }
           ].map((item, index) => (
@@ -92,7 +92,7 @@ const GignestCaseStudy = () => {
           <div className="grid sm:grid-cols-2 gap-2">
             {gignest.features.map((feature) => (
               <div key={feature} className="flex items-center gap-2 text-sm" style={{ color: '#B0B7C3' }}>
-                <span style={{ color: '#00E5FF' }}>→</span> {feature}
+                <span style={{ color: '#14B8A6' }}>→</span> {feature}
               </div>
             ))}
           </div>
@@ -109,9 +109,9 @@ const GignestCaseStudy = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + (index * 0.05), type: 'spring', stiffness: 200 }}
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,229,255,0.15)' }}
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(20,184,166,0.15)' }}
                 className="px-3 py-1.5 rounded-full text-xs font-semibold cursor-pointer transition-colors"
-                style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.2)', color: '#00E5FF' }}>
+                style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.2)', color: '#14B8A6' }}>
                 {tech}
               </motion.span>
             ))}
@@ -135,7 +135,7 @@ const Projects = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(0,229,255,0.05) 15%, transparent 100%)',
+          backgroundImage: 'linear-gradient(to bottom, transparent 0%, rgba(20,184,166,0.05) 15%, transparent 100%)',
         }}
       />
 
@@ -147,7 +147,7 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)', color: '#7C3AED' }}
+            style={{ background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)', color: '#8B5CF6' }}
           >
             My Work
           </motion.div>
@@ -161,7 +161,7 @@ const Projects = () => {
           >
             Featured{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+              backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

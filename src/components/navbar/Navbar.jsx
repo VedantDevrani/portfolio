@@ -1,9 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import { FiHome, FiUser, FiCpu, FiFolder, FiBookOpen, FiMail } from 'react-icons/fi';
 import { navLinks } from '../../constants';
 import myImage from '../../assets/Myimage.png';
 import Magnetic from '../common/Magnetic';
+
+const getNavIcon = (label) => {
+  switch (label) {
+    case 'Home': return <FiHome size={16} />;
+    case 'About': return <FiUser size={16} />;
+    case 'Skills': return <FiCpu size={16} />;
+    case 'Projects': return <FiFolder size={16} />;
+    case 'Education': return <FiBookOpen size={16} />;
+    case 'Contact': return <FiMail size={16} />;
+    default: return null;
+  }
+};
 
 const Navbar = ({ activeSection }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -61,13 +74,13 @@ const Navbar = ({ activeSection }) => {
               ? 'rgba(5,8,22,0.75)'
               : 'rgba(5,8,22,0.4)',
             backdropFilter: 'blur(24px)',
-            border: scrolled ? '1px solid rgba(0,229,255,0.3)' : '1px solid rgba(255,255,255,0.08)',
-            boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1) inset' : '0 10px 30px rgba(0,0,0,0.3)',
+            border: scrolled ? '1px solid rgba(20,184,166,0.3)' : '1px solid rgba(255,255,255,0.08)',
+            boxShadow: scrolled ? '0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(20,184,166,0.1) inset' : '0 10px 30px rgba(0,0,0,0.3)',
           }}
         >
           {/* Top glowing edge when scrolled */}
           {scrolled && (
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00E5FF] to-transparent opacity-80" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#14B8A6] to-transparent opacity-80" />
           )}
 
           <div className="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -83,17 +96,17 @@ const Navbar = ({ activeSection }) => {
                 <motion.div 
                   animate={{ rotate: 360 }}
                   transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                  className="absolute inset-0 rounded-full border border-dashed border-[#00E5FF]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="absolute inset-0 rounded-full border border-dashed border-[#14B8A6]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
                 <img
                   src={myImage}
                   alt="Logo"
                   className="w-8 h-8 rounded-full object-cover relative z-10"
-                  style={{ boxShadow: '0 0 15px rgba(0,229,255,0.4)' }}
+                  style={{ boxShadow: '0 0 15px rgba(20,184,166,0.4)' }}
                 />
               </div>
-              <span className="font-display font-bold text-white hidden sm:block text-lg tracking-wide group-hover:text-shadow transition-all duration-300" style={{ textShadow: '0 0 10px rgba(0,229,255,0)' }}>
-                Vedant<span style={{ color: '#00E5FF' }}>.dev</span>
+              <span className="font-display font-bold text-white hidden sm:block text-lg tracking-wide group-hover:text-shadow transition-all duration-300" style={{ textShadow: '0 0 10px rgba(20,184,166,0)' }}>
+                Vedant<span style={{ color: '#14B8A6' }}>.dev</span>
               </span>
             </motion.a>
 
@@ -108,23 +121,26 @@ const Navbar = ({ activeSection }) => {
                     <a
                       href={link.href}
                       onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                      className="relative px-5 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-300 rounded-full"
+                      className="relative inline-flex items-center justify-center px-5 py-2 text-sm font-bold capitalize tracking-wider transition-all duration-300 rounded-full"
                       style={{
-                        color: isActive ? '#00E5FF' : '#8B95A5',
-                        textShadow: isActive ? '0 0 10px rgba(0,229,255,0.5)' : 'none',
+                        color: isActive ? '#14B8A6' : '#8B95A5',
+                        textShadow: isActive ? '0 0 10px rgba(20,184,166,0.5)' : 'none',
                       }}
                     >
                       {isActive && (
                         <span
                           className="absolute inset-0 rounded-full"
                           style={{ 
-                            background: 'rgba(0,229,255,0.1)', 
-                            border: '1px solid rgba(0,229,255,0.3)',
-                            boxShadow: '0 0 15px rgba(0,229,255,0.15) inset'
+                            background: 'rgba(20,184,166,0.1)', 
+                            border: '1px solid rgba(20,184,166,0.3)',
+                            boxShadow: '0 0 15px rgba(20,184,166,0.15) inset'
                           }}
                         />
                       )}
-                      <span className="relative z-10 hover:text-white transition-colors">{link.label}</span>
+                      <span className="relative z-10 hover:text-white transition-colors flex items-center gap-2">
+                        {getNavIcon(link.label)}
+                        {link.label}
+                      </span>
                     </a>
                   </Magnetic>
                 );
@@ -139,7 +155,7 @@ const Navbar = ({ activeSection }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hidden sm:inline-flex items-center justify-center px-6 py-2 rounded-full text-sm font-black text-black tracking-widest uppercase relative overflow-hidden group"
-                  style={{ background: '#00E5FF', boxShadow: '0 0 20px rgba(0,229,255,0.4)' }}
+                  style={{ background: '#14B8A6', boxShadow: '0 0 20px rgba(20,184,166,0.4)' }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -151,7 +167,7 @@ const Navbar = ({ activeSection }) => {
 
               {/* Mobile hamburger */}
               <button
-                className="lg:hidden p-2 rounded-full text-[#00E5FF] border border-[#00E5FF]/30 hover:bg-[#00E5FF]/10 transition-colors"
+                className="lg:hidden p-2 rounded-full text-[#14B8A6] border border-[#14B8A6]/30 hover:bg-[#14B8A6]/10 transition-colors"
                 onClick={() => setMenuOpen(!menuOpen)}
               >
                 {menuOpen ? <HiX size={20} /> : <HiMenuAlt4 size={20} />}
@@ -185,12 +201,13 @@ const Navbar = ({ activeSection }) => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="px-4 py-3 rounded-xl text-sm font-medium transition-colors"
+                  className="px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center gap-3"
                   style={{
-                    color: internalActive === link.href.replace('#', '') ? '#00E5FF' : '#B0B7C3',
-                    background: internalActive === link.href.replace('#', '') ? 'rgba(0,229,255,0.08)' : 'transparent',
+                    color: internalActive === link.href.replace('#', '') ? '#14B8A6' : '#B0B7C3',
+                    background: internalActive === link.href.replace('#', '') ? 'rgba(20,184,166,0.08)' : 'transparent',
                   }}
                 >
+                  {getNavIcon(link.label)}
                   {link.label}
                 </motion.a>
               ))}
@@ -200,7 +217,7 @@ const Navbar = ({ activeSection }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center w-full py-3 rounded-xl text-sm font-semibold text-black"
-                  style={{ background: 'linear-gradient(135deg, #00E5FF, #7C3AED)' }}
+                  style={{ backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)' }}
                 >
                   Download Resume
                 </a>

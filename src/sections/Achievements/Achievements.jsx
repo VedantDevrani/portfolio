@@ -30,7 +30,7 @@ const AchievementCard = ({ item, index }) => {
       {/* Top gradient */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px]"
-        style={{ background: `linear-gradient(90deg, transparent, ${item.color}, transparent)` }}
+        style={{ backgroundImage: `linear-gradient(90deg, transparent, ${item.color}, transparent)` }}
       />
 
       {/* Glow bg */}
@@ -77,7 +77,7 @@ const Achievements = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(124,58,237,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(139,92,246,0.05) 0%, transparent 70%)',
         }}
       />
 
@@ -103,7 +103,7 @@ const Achievements = () => {
           >
             Achievements &{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #F59E0B, #E879F9)',
+              backgroundImage: 'linear-gradient(135deg, #F59E0B, #4338CA)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

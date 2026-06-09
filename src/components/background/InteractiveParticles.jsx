@@ -93,7 +93,7 @@ const InteractiveParticles = () => {
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
         let directionX = (Math.random() * 0.4) - 0.2;
         let directionY = (Math.random() * 0.4) - 0.2;
-        let color = Math.random() > 0.5 ? '#00E5FF' : '#7C3AED';
+        let color = Math.random() > 0.5 ? '#14B8A6' : '#8B5CF6';
         
         particles.push(new Particle(x, y, directionX, directionY, size, color));
       }

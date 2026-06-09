@@ -174,7 +174,7 @@ export const codingProfiles = [
     stats: [
       { label: 'Easy', value: 200, color: '#22C55E' },
       { label: 'Medium', value: 200, color: '#EAB308' },
-      { label: 'Hard', value: 50, color: '#EF4444' },
+      { label: 'Hard', value: 50, color: '#4338CA' },
     ],
   },
   {
@@ -188,7 +188,7 @@ export const codingProfiles = [
     bgColor: 'rgba(91, 70, 56, 0.15)',
     borderColor: 'rgba(91, 70, 56, 0.4)',
     stats: [
-      { label: 'Division', value: '2', color: '#F97316' },
+      { label: 'Division', value: '2', color: '#14B8A6' },
       { label: 'Contests', value: 25, color: '#8B5CF6' },
       { label: 'Global Rank', value: '12K', color: '#06B6D4' },
     ],
@@ -220,7 +220,7 @@ export const codingProfiles = [
     bgColor: 'rgba(240, 85, 56, 0.1)',
     borderColor: 'rgba(240, 85, 56, 0.3)',
     stats: [
-      { label: 'Streak', value: '30 days', color: '#EF4444' },
+      { label: 'Streak', value: '30 days', color: '#4338CA' },
       { label: 'Badges', value: 12, color: '#8B5CF6' },
       { label: 'Level', value: 'Expert', color: '#F59E0B' },
     ],
@@ -273,9 +273,9 @@ export const education = [
 // ACHIEVEMENTS
 // ==============================================
 export const achievements = [
-  { label: 'Projects Built', value: 15, suffix: '+', icon: '🚀', color: '#00E5FF' },
-  { label: 'DSA Problems Solved', value: 1030, suffix: '+', icon: '🧩', color: '#7C3AED' },
-  { label: 'Certifications', value: 8, suffix: '+', icon: '🏆', color: '#E879F9' },
+  { label: 'Projects Built', value: 15, suffix: '+', icon: '🚀', color: '#14B8A6' },
+  { label: 'DSA Problems Solved', value: 1030, suffix: '+', icon: '🧩', color: '#8B5CF6' },
+  { label: 'Certifications', value: 8, suffix: '+', icon: '🏆', color: '#4338CA' },
   { label: 'Hackathons', value: 5, suffix: '+', icon: '⚡', color: '#F59E0B' },
 ];
 
@@ -287,21 +287,21 @@ export const aboutCards = [
     title: 'Frontend Development',
     description: 'Building beautiful, responsive UIs with React, Next.js, and modern CSS. Focused on performance and user experience.',
     icon: '🎨',
-    color: '#00E5FF',
+    color: '#14B8A6',
     skills: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     title: 'Backend Development',
     description: 'Designing scalable APIs with Node.js and Express. Building reliable server infrastructure with MongoDB and PostgreSQL.',
     icon: '⚙️',
-    color: '#7C3AED',
+    color: '#8B5CF6',
     skills: ['Node.js', 'Express', 'MongoDB', 'REST APIs'],
   },
   {
     title: 'DSA & Problem Solving',
     description: 'Solving 1000+ problems across platforms. Strong fundamentals in algorithms, data structures, and competitive programming.',
     icon: '🧩',
-    color: '#E879F9',
+    color: '#4338CA',
     skills: ['C++', 'LeetCode', 'CodeChef', 'GeeksforGeeks'],
   },
   {

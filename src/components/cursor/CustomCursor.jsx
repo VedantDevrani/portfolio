@@ -77,8 +77,8 @@ const CustomCursor = () => {
         <div
           className="w-2 h-2 rounded-full"
           style={{
-            background: '#00E5FF',
-            boxShadow: '0 0 8px #00E5FF, 0 0 16px rgba(0,229,255,0.5)',
+            background: '#14B8A6',
+            boxShadow: '0 0 8px #14B8A6, 0 0 16px rgba(20,184,166,0.5)',
             transform: isClicking ? 'scale(0.7)' : 'scale(1)',
             transition: 'transform 0.1s',
           }}
@@ -96,11 +96,11 @@ const CustomCursor = () => {
             width: isHovering ? '48px' : '32px',
             height: isHovering ? '48px' : '32px',
             borderRadius: '50%',
-            border: `1.5px solid ${isHovering ? 'rgba(0,229,255,0.8)' : 'rgba(0,229,255,0.4)'}`,
+            border: `1.5px solid ${isHovering ? 'rgba(20,184,166,0.8)' : 'rgba(20,184,166,0.4)'}`,
             boxShadow: isHovering
-              ? '0 0 20px rgba(0,229,255,0.3), inset 0 0 20px rgba(0,229,255,0.1)'
+              ? '0 0 20px rgba(20,184,166,0.3), inset 0 0 20px rgba(20,184,166,0.1)'
               : 'none',
-            background: isHovering ? 'rgba(0,229,255,0.05)' : 'transparent',
+            background: isHovering ? 'rgba(20,184,166,0.05)' : 'transparent',
             transition: 'width 0.3s cubic-bezier(0.4,0,0.2,1), height 0.3s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s, background 0.3s',
           }}
         />

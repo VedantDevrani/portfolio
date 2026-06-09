@@ -20,8 +20,8 @@ const TimelineItem = ({ item, index }) => {
           className="p-6 rounded-2xl relative transition-all duration-300"
           whileHover={{
             scale: 1.02,
-            boxShadow: '0 10px 40px rgba(0, 229, 255, 0.15), inset 0 0 20px rgba(0, 229, 255, 0.05)',
-            borderColor: 'rgba(0, 229, 255, 0.4)',
+            boxShadow: '0 10px 40px rgba(20,184,166, 0.15), inset 0 0 20px rgba(20,184,166, 0.05)',
+            borderColor: 'rgba(20,184,166, 0.4)',
           }}
           style={{
             background: 'rgba(255,255,255,0.03)',
@@ -35,9 +35,9 @@ const TimelineItem = ({ item, index }) => {
               <span
                 className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-2"
                 style={{
-                  background: item.current ? 'rgba(0,229,255,0.08)' : 'rgba(255,255,255,0.04)',
-                  border: `1px solid ${item.current ? 'rgba(0,229,255,0.2)' : 'rgba(255,255,255,0.08)'}`,
-                  color: item.current ? '#00E5FF' : '#6B7280',
+                  background: item.current ? 'rgba(20,184,166,0.08)' : 'rgba(255,255,255,0.04)',
+                  border: `1px solid ${item.current ? 'rgba(20,184,166,0.2)' : 'rgba(255,255,255,0.08)'}`,
+                  color: item.current ? '#14B8A6' : '#6B7280',
                 }}
               >
                 {item.year}
@@ -50,7 +50,7 @@ const TimelineItem = ({ item, index }) => {
                 </span>
               )}
               <h3 className="font-display font-bold text-white text-lg leading-tight mt-1">{item.degree}</h3>
-              <p className="text-sm mt-0.5" style={{ color: '#7C3AED' }}>{item.major}</p>
+              <p className="text-sm mt-0.5" style={{ color: '#8B5CF6' }}>{item.major}</p>
               <p className="text-sm mt-0.5" style={{ color: '#B0B7C3' }}>{item.institution}</p>
             </div>
           </div>
@@ -59,19 +59,19 @@ const TimelineItem = ({ item, index }) => {
           <div className="flex gap-3 mb-4">
             {item.cgpa && (
               <div className="px-3 py-1.5 rounded-xl text-xs font-semibold"
-                style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', color: '#00E5FF' }}>
+                style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.15)', color: '#14B8A6' }}>
                 CGPA: {item.cgpa}/10
               </div>
             )}
             {item.percentage && (
               <div className="px-3 py-1.5 rounded-xl text-xs font-semibold"
-                style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', color: '#00E5FF' }}>
+                style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.15)', color: '#14B8A6' }}>
                 {item.percentage}
               </div>
             )}
             {item.year_num && (
               <div className="px-3 py-1.5 rounded-xl text-xs font-semibold"
-                style={{ background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.15)', color: '#7C3AED' }}>
+                style={{ background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.15)', color: '#8B5CF6' }}>
                 {item.year_num}
               </div>
             )}
@@ -99,7 +99,7 @@ const TimelineItem = ({ item, index }) => {
             <div className="mt-3 pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
               {item.highlights.map((h) => (
                 <div key={h} className="flex items-center gap-2 text-xs mt-1.5" style={{ color: '#B0B7C3' }}>
-                  <span style={{ color: '#00E5FF' }}>✓</span> {h}
+                  <span style={{ color: '#14B8A6' }}>✓</span> {h}
                 </div>
               ))}
             </div>
@@ -110,16 +110,16 @@ const TimelineItem = ({ item, index }) => {
       {/* Timeline connector (desktop) */}
       <div className="hidden lg:flex w-2/12 flex-col items-center">
         <motion.div
-          initial={{ scale: 0, boxShadow: '0 0 0px rgba(0,229,255,0)' }}
+          initial={{ scale: 0, boxShadow: '0 0 0px rgba(20,184,166,0)' }}
           whileInView={{ 
             scale: [0, 1.2, 1],
-            boxShadow: ['0 0 0px rgba(0,229,255,0)', '0 0 50px rgba(0,229,255,1)', '0 0 20px rgba(0,229,255,0.5)']
+            boxShadow: ['0 0 0px rgba(20,184,166,0)', '0 0 50px rgba(20,184,166,1)', '0 0 20px rgba(20,184,166,0.5)']
           }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.2 + 0.3, duration: 0.8 }}
           className="w-10 h-10 rounded-full flex items-center justify-center z-10 relative animate-[pulse_3s_ease-in-out_infinite]"
           style={{
-            background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+            backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
           }}
         >
           <HiAcademicCap size={18} className="text-white" />
@@ -150,7 +150,7 @@ const Education = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(124,58,237,0.02) 50%, transparent 100%)',
+          backgroundImage: 'linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.02) 50%, transparent 100%)',
         }}
       />
 
@@ -162,7 +162,7 @@ const Education = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.2)', color: '#00E5FF' }}
+            style={{ background: 'rgba(20,184,166,0.08)', border: '1px solid rgba(20,184,166,0.2)', color: '#14B8A6' }}
           >
             Academic Journey
           </motion.div>
@@ -176,7 +176,7 @@ const Education = () => {
           >
             Education &{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+              backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -198,8 +198,8 @@ const Education = () => {
             className="absolute left-5 lg:left-1/2 top-0 w-[2px] -translate-x-1/2"
             style={{ 
               height,
-              background: 'linear-gradient(to bottom, #00E5FF, #7C3AED)',
-              boxShadow: '0 0 15px #00E5FF, 0 0 30px #7C3AED'
+              backgroundImage: 'linear-gradient(to bottom, #14B8A6, #8B5CF6)',
+              boxShadow: '0 0 15px #14B8A6, 0 0 30px #8B5CF6'
             }}
           />
 

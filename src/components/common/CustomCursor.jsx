@@ -57,8 +57,8 @@ const CustomCursor = () => {
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999]"
         style={{
-          background: '#00E5FF',
-          boxShadow: '0 0 10px #00E5FF',
+          background: '#14B8A6',
+          boxShadow: '0 0 10px #14B8A6',
           translateX: mousePosition.x - 4, // Center 8px dot
           translateY: mousePosition.y - 4,
         }}
@@ -71,15 +71,15 @@ const CustomCursor = () => {
 
       {/* Trailing Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] border border-[#00E5FF]/50"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] border border-[#14B8A6]/50"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
         }}
         animate={{
           scale: isHovering ? 1.5 : 1,
-          background: isHovering ? 'rgba(0, 229, 255, 0.1)' : 'transparent',
-          borderColor: isHovering ? 'rgba(0, 229, 255, 0.8)' : 'rgba(0, 229, 255, 0.5)',
+          background: isHovering ? 'rgba(20,184,166, 0.1)' : 'transparent',
+          borderColor: isHovering ? 'rgba(20,184,166, 0.8)' : 'rgba(20,184,166, 0.5)',
         }}
         transition={{ duration: 0.2 }}
       />

@@ -31,7 +31,7 @@ const AnimatedBackground = () => {
         this.speedX = (Math.random() - 0.5) * 0.3;
         this.speedY = (Math.random() - 0.5) * 0.3;
         this.opacity = Math.random() * 0.4 + 0.1;
-        this.color = Math.random() > 0.5 ? '#00E5FF' : '#7C3AED';
+        this.color = Math.random() > 0.5 ? '#14B8A6' : '#8B5CF6';
         this.life = 0;
         this.maxLife = Math.random() * 200 + 100;
       }
@@ -76,8 +76,8 @@ const AnimatedBackground = () => {
 
       // Draw gradient mesh orbs
       const orbs = [
-        { x: canvas.width * 0.2, y: canvas.height * 0.3, r: 300, color: 'rgba(0,229,255,0.04)' },
-        { x: canvas.width * 0.8, y: canvas.height * 0.7, r: 350, color: 'rgba(124,58,237,0.04)' },
+        { x: canvas.width * 0.2, y: canvas.height * 0.3, r: 300, color: 'rgba(20,184,166,0.04)' },
+        { x: canvas.width * 0.8, y: canvas.height * 0.7, r: 350, color: 'rgba(139,92,246,0.04)' },
         { x: canvas.width * 0.5 + Math.sin(time) * 100, y: canvas.height * 0.5 + Math.cos(time) * 50, r: 250, color: 'rgba(232,121,249,0.03)' },
       ];
 
@@ -106,7 +106,7 @@ const AnimatedBackground = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 100) {
             ctx.globalAlpha = ((100 - dist) / 100) * 0.08;
-            ctx.strokeStyle = '#00E5FF';
+            ctx.strokeStyle = '#14B8A6';
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
@@ -142,8 +142,8 @@ const AnimatedBackground = () => {
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           background: `
-            radial-gradient(ellipse 800px 600px at 20% 30%, rgba(0,229,255,0.04) 0%, transparent 70%),
-            radial-gradient(ellipse 600px 800px at 80% 70%, rgba(124,58,237,0.05) 0%, transparent 70%),
+            radial-gradient(ellipse 800px 600px at 20% 30%, rgba(20,184,166,0.04) 0%, transparent 70%),
+            radial-gradient(ellipse 600px 800px at 80% 70%, rgba(139,92,246,0.05) 0%, transparent 70%),
             radial-gradient(ellipse 400px 400px at 50% 50%, rgba(232,121,249,0.02) 0%, transparent 70%)
           `,
         }}
@@ -157,8 +157,8 @@ const AnimatedBackground = () => {
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.02]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(0,229,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,229,255,1) 1px, transparent 1px)
+            linear-gradient(rgba(20,184,166,1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(20,184,166,1) 1px, transparent 1px)
           `,
           backgroundSize: '80px 80px',
         }}

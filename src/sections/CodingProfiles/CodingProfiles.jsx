@@ -160,7 +160,7 @@ const CodingProfiles = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(232,121,249,0.08)', border: '1px solid rgba(232,121,249,0.2)', color: '#E879F9' }}
+            style={{ background: 'rgba(232,121,249,0.08)', border: '1px solid rgba(232,121,249,0.2)', color: '#4338CA' }}
           >
             Problem Solving
           </motion.div>
@@ -174,7 +174,7 @@ const CodingProfiles = () => {
           >
             Coding{' '}
             <span style={{
-              background: 'linear-gradient(135deg, #E879F9, #7C3AED)',
+              backgroundImage: 'linear-gradient(135deg, #4338CA, #8B5CF6)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -219,9 +219,9 @@ const CodingProfiles = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-12">
             {[
-              { label: 'Total Problems', value: 1030, color: '#00E5FF' },
-              { label: 'Platforms Active', value: 4, color: '#7C3AED' },
-              { label: 'Average Rating', value: 1218, color: '#E879F9' },
+              { label: 'Total Problems', value: 1030, color: '#14B8A6' },
+              { label: 'Platforms Active', value: 4, color: '#8B5CF6' },
+              { label: 'Average Rating', value: 1218, color: '#4338CA' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="font-display font-black text-4xl mb-1" style={{ color: stat.color }}>

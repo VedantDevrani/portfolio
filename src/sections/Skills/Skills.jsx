@@ -32,7 +32,7 @@ const skillMap = {
   'Express.js': { icon: SiExpress, color: '#CCCCCC' },
   'MongoDB': { icon: SiMongodb, color: '#47A248' },
   'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
-  'REST APIs': { icon: FaNetworkWired, color: '#00E5FF' },
+  'REST APIs': { icon: FaNetworkWired, color: '#14B8A6' },
   'Firebase': { icon: SiFirebase, color: '#FFCA28' },
   'C++': { icon: SiCplusplus, color: '#00599C' },
   'Python': { icon: SiPython, color: '#3776AB' },
@@ -42,14 +42,14 @@ const skillMap = {
   'Postman': { icon: SiPostman, color: '#FF6C37' },
   'Figma': { icon: SiFigma, color: '#F24E1E' },
   'VS Code': { icon: FaCode, color: '#007ACC' },
-  'Arrays & Strings': { icon: FaCode, color: '#E879F9' },
-  'Trees & Graphs': { icon: FaNetworkWired, color: '#E879F9' },
-  'Dynamic Programming': { icon: FaPuzzlePiece, color: '#E879F9' },
-  'Sorting & Searching': { icon: FaDatabase, color: '#E879F9' },
-  'Recursion & Backtracking': { icon: FaServer, color: '#E879F9' },
+  'Arrays & Strings': { icon: FaCode, color: '#4338CA' },
+  'Trees & Graphs': { icon: FaNetworkWired, color: '#4338CA' },
+  'Dynamic Programming': { icon: FaPuzzlePiece, color: '#4338CA' },
+  'Sorting & Searching': { icon: FaDatabase, color: '#4338CA' },
+  'Recursion & Backtracking': { icon: FaServer, color: '#4338CA' },
 };
 
-const SkillCard = ({ skill, index, category, color = '#00E5FF' }) => {
+const SkillCard = ({ skill, index, category, color = '#14B8A6' }) => {
   const barRef = useRef(null);
   const [animated, setAnimated] = useState(false);
 
@@ -144,7 +144,7 @@ const SkillCard = ({ skill, index, category, color = '#00E5FF' }) => {
               style={{ 
                 border: `1px solid ${skillColor}60`,
                 boxShadow: `inset 0 0 20px ${skillColor}20, 0 0 30px ${skillColor}30`,
-                background: `linear-gradient(135deg, ${skillColor}20, transparent)`
+                backgroundImage: `linear-gradient(135deg, ${skillColor}20, transparent)`
               }} 
             />
             {/* Icon */}
@@ -170,7 +170,7 @@ const SkillCard = ({ skill, index, category, color = '#00E5FF' }) => {
               ref={barRef}
               className="absolute top-0 left-0 h-full"
               style={{ 
-                background: `linear-gradient(90deg, ${skillColor}80, ${skillColor})`,
+                backgroundImage: `linear-gradient(90deg, ${skillColor}80, ${skillColor})`,
                 boxShadow: `0 0 10px ${skillColor}`,
                 width: '0%' 
               }} 
@@ -193,11 +193,11 @@ const Skills = () => {
   const sectionRef = useRef(null);
 
   const tabColors = {
-    frontend: '#00E5FF',
-    backend: '#7C3AED',
-    dsa: '#E879F9',
+    frontend: '#14B8A6',
+    backend: '#8B5CF6',
+    dsa: '#4338CA',
     programming: '#F59E0B',
-    tools: '#10B981',
+    tools: '#14B8A6',
   };
 
   const currentColor = tabColors[activeTab];
@@ -226,7 +226,7 @@ const Skills = () => {
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse 60% 40% at 80% 50%, rgba(124,58,237,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse 60% 40% at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 70%)',
           }}
         />
         
@@ -235,8 +235,8 @@ const Skills = () => {
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(0, 229, 255, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 229, 255, 0.2) 1px, transparent 1px)
+              linear-gradient(rgba(20,184,166, 0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(20,184,166, 0.2) 1px, transparent 1px)
             `,
             backgroundSize: '40px 40px',
             transform: 'perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px)',
@@ -284,8 +284,8 @@ const Skills = () => {
             style={{
               width: Math.random() * 4 + 2 + 'px',
               height: Math.random() * 4 + 2 + 'px',
-              background: i % 2 === 0 ? '#00E5FF' : '#7C3AED',
-              boxShadow: `0 0 10px ${i % 2 === 0 ? '#00E5FF' : '#7C3AED'}`,
+              background: i % 2 === 0 ? '#14B8A6' : '#8B5CF6',
+              boxShadow: `0 0 10px ${i % 2 === 0 ? '#14B8A6' : '#8B5CF6'}`,
               left: Math.random() * 100 + '%',
             }}
           />
@@ -301,9 +301,9 @@ const Skills = () => {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest mb-4"
             style={{
-              background: 'rgba(0,229,255,0.08)',
-              border: '1px solid rgba(0,229,255,0.2)',
-              color: '#00E5FF',
+              background: 'rgba(20,184,166,0.08)',
+              border: '1px solid rgba(20,184,166,0.2)',
+              color: '#14B8A6',
             }}
           >
             Technical Arsenal
@@ -319,7 +319,7 @@ const Skills = () => {
             Skills &{' '}
             <span
               style={{
-                background: 'linear-gradient(135deg, #00E5FF, #7C3AED)',
+                backgroundImage: 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -416,9 +416,9 @@ const Skills = () => {
                   color: '#B0B7C3',
                 }}
                 whileHover={{
-                  background: 'rgba(0,229,255,0.06)',
-                  borderColor: 'rgba(0,229,255,0.2)',
-                  color: '#00E5FF',
+                  background: 'rgba(20,184,166,0.06)',
+                  borderColor: 'rgba(20,184,166,0.2)',
+                  color: '#14B8A6',
                   scale: 1.05,
                 }}
               >
